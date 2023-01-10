@@ -1,0 +1,77 @@
+﻿@model ProductViewModel
+<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#ModalAdd">
+	Thêm
+</button>
+<div class="mb-5">
+	<label>danh mục sản phẩm</label>
+<div class="form-group col-12 col-sm-6">
+<select id="listCat" class="form-control">
+	@foreach (var cat in Model.Categories)
+	{
+		<option value="@cat.Id">@cat.Name</option>
+
+	}
+
+</select>
+</div>
+</div>
+<div id="result">
+	<partial name="_ListProduct" ></partial>
+</div>
+<div class="modal fade" id="ModalAdd" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+	<div class="modal-dialog">
+		<div class="modal-content">
+			<form method="post" asp-action="Insert" enctype="multipart/form-data">
+				<div class="modal-header">
+					<h1 class="modal-title fs-5" id="exampleModalLabel">Thêm Sản Phẩm</h1>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body">
+					<div class="form-group">
+						<label>Tên sản phẩm</label>
+						<input class="form-label" type="text" asp-for="ProductRequest.Name" />
+
+					</div>
+					<div class="form-group">
+						<label>giá sản phẩm</label>
+						<input class="form-label" type="number" min="1" asp-for="ProductRequest.Price" />
+
+					</div>
+					<div class="form-group">
+						<label>Ngày Nhập</label>
+						<input class="form-label" type="datetime-local" asp-for="ProductRequest.DateCreated" />
+
+					</div>
+					<div class="form-group">
+						<label>Mô tả sản phẩm</label>
+						<textarea style="width:100%" asp-for="ProductRequest.Description"></textarea>
+					</div>
+					<div class="form-group">
+						<label class="form-lable">Ảnh Sản Phẩm</label>
+						<input class="form-control" type="file" asp-for="ProductRequest.Avatar" />
+
+					</div>
+					<div class="form-group">
+						<label>Danh mục</label>
+						<select class="my-select" asp-for="ProductRequest.CategoryId">
+
+							@foreach (var cat in Model.Categories)
+							{
+								<option value="@cat.Id">@cat.Name</option>
+							}
+
+						</select>
+					</div>
+				</div>
+				<div class="modal-footer">
+					<button type="submit" class="btn btn-primary">Tạo mới</button>
+					<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Hủy</button>
+				</div>
+			</form>
+		</div>
+	</div>
+</div>
+<!--end modal add-->
+
+
+
